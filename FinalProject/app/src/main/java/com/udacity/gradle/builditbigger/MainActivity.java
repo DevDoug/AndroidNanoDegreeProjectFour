@@ -1,5 +1,8 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
+import android.content.Intent;
+import android.util.Pair;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,15 +10,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.LaughFactory;
+import com.rayware.jokeview.ImageViewActivity;
+import com.udacity.gradle.builditbigger.utils.Constants;
+import com.udacity.gradle.builditbigger.web.*;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity implements EndpointsAsyncTask.AsyncResponse{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -40,8 +47,17 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void tellJoke(View view){
-        Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
+        new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, LaughFactory.tellJoke()));
     }
 
+    public void launchLibraryActivity(String joke){
+        Intent libraryIntent = new Intent(this, ImageViewActivity.class);
+        libraryIntent.putExtra(Constants.EXTRA_JOKE,joke);
+        startActivity(libraryIntent);
+    }
 
+    @Override
+    public void getBackEndResponse(String output) {
+        launchLibraryActivity(output);
+    }
 }
