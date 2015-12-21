@@ -13,13 +13,20 @@
     <TextView android:text="@string/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/instructions_text_view" />
+        android:id="@+id/instructions_text_view"
+        android:textSize="@dimen/tell_joke_placeholder_text_size"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/instructions_text_view"
         android:text="@string/button_text"
-        android:onClick="tellJoke" />
-
+        android:onClick="tellJoke"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/instructions_text_view"
+        android:layout_alignEnd="@+id/instructions_text_view"
+        android:layout_marginBottom="27dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

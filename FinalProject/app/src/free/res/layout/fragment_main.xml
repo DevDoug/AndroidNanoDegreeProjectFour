@@ -13,7 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/instructions_text_view"
-        android:layout_alignParentTop="true"
+        android:textSize="@dimen/tell_joke_placeholder_text_size"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -21,9 +22,12 @@
         android:layout_height="wrap_content"
         android:text="@string/button_text"
         android:onClick="tellJoke"
-        android:layout_below="@+id/instructions_text_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/instructions_text_view"
+        android:layout_alignEnd="@+id/instructions_text_view"
+        android:layout_marginBottom="27dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ProgressBar
         android:id="@+id/loading_joke"

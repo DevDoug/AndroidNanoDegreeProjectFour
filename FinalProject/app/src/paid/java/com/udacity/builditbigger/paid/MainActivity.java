@@ -58,7 +58,6 @@ public class MainActivity extends ActionBarActivity implements EndpointsAsyncTas
 
     @Override
     public void getBackEndResponse(String output) {
-
         launchLibraryActivity(output);
     }
 }

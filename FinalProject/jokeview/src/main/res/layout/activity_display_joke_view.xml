@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:text="Funny Joke"
         android:id="@+id/joke_text"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp" />
+        android:textSize="@dimen/funny_joke"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
