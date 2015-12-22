@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import com.example.LaughFactory;
 import com.rayware.jokeview.DisplayJokeActivity;
@@ -18,10 +20,22 @@ import com.udacity.gradle.builditbigger.web.*;
 
 public class MainActivity extends ActionBarActivity implements EndpointsAsyncTask.AsyncResponse{
 
+    ProgressBar spinner;
+    ViewSwitcher mViewSwitch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        spinner = (ProgressBar) findViewById(R.id.loading_joke);
+        mViewSwitch = (ViewSwitcher) findViewById(R.id.viewSwitcher2);
+    }
+
+    @Override
+    protected void onStop(){
+        mViewSwitch.setDisplayedChild(0);
+        super.onStop();
     }
 
     @Override
@@ -47,6 +61,7 @@ public class MainActivity extends ActionBarActivity implements EndpointsAsyncTas
     }
 
     public void tellJoke(View view){
+        mViewSwitch.showNext();
         new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, LaughFactory.tellJoke()));
     }
 

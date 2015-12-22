@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.ViewSwitcher;
 
 import com.example.LaughFactory;
 import com.google.android.gms.ads.AdListener;
@@ -24,6 +26,8 @@ public class MainActivity extends ActionBarActivity implements EndpointsAsyncTas
 
     AdView adView;
     InterstitialAd mInterstitialAd;
+    ProgressBar spinner;
+    ViewSwitcher mViewSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +36,25 @@ public class MainActivity extends ActionBarActivity implements EndpointsAsyncTas
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        spinner = (ProgressBar) findViewById(R.id.loading_joke);
+        mViewSwitch = (ViewSwitcher) findViewById(R.id.viewSwitcher);
 
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
+                mViewSwitch.showNext();
                 requestNewInterstitial();
                 new EndpointsAsyncTask(MainActivity.this).execute(new Pair<Context, String>(MainActivity.this, LaughFactory.tellJoke()));
             }
         });
 
         requestNewInterstitial();
+    }
+
+    @Override
+    protected void onStop(){
+        mViewSwitch.setDisplayedChild(0);
+        super.onStop();
     }
 
     @Override
@@ -69,8 +82,6 @@ public class MainActivity extends ActionBarActivity implements EndpointsAsyncTas
     public void tellJoke(View view){
         if (mInterstitialAd.isLoaded()) {
             mInterstitialAd.show();
-        } else {
-            //beginPlayingGame();
         }
     }
 
